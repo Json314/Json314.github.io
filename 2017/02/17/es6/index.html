@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>es6 | 王荣老公的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ES61、let和const命令 let命令 
+let声明的变量，只在当前代码块中有效。——适合用于for循环等  
+没有声明提前，一定要先声明再使用。
+ const命令 
+const声明的常量，一旦声明，不可改变。跟let一样，先声明，后使用。如果const声明了一个数组或者对象，指向该类型数据的地址，该类型数据里的属性跟值是可以改变的，但是不能将一个新的对象或数组重新赋值，因为地址要改变了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6">
+<meta property="og:url" content="http://yoursite.com/2017/02/17/es6/index.html">
+<meta property="og:site_name" content="王荣老公的博客">
+<meta property="og:description" content="ES61、let和const命令 let命令 
+let声明的变量，只在当前代码块中有效。——适合用于for循环等  
+没有声明提前，一定要先声明再使用。
+ const命令 
+const声明的常量，一旦声明，不可改变。跟let一样，先声明，后使用。如果const声明了一个数组或者对象，指向该类型数据的地址，该类型数据里的属性跟值是可以改变的，但是不能将一个新的对象或数组重新赋值，因为地址要改变了。">
+<meta property="og:updated_time" content="2017-02-17T08:43:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es6">
+<meta name="twitter:description" content="ES61、let和const命令 let命令 
+let声明的变量，只在当前代码块中有效。——适合用于for循环等  
+没有声明提前，一定要先声明再使用。
+ const命令 
+const声明的常量，一旦声明，不可改变。跟let一样，先声明，后使用。如果const声明了一个数组或者对象，指向该类型数据的地址，该类型数据里的属性跟值是可以改变的，但是不能将一个新的对象或数组重新赋值，因为地址要改变了。">
+  
+    <link rel="alternate" href="/atom.xml" title="王荣老公的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">王荣老公的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-es6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/17/es6/" class="article-date">
+  <time datetime="2017-02-17T08:41:44.000Z" itemprop="datePublished">2017-02-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      es6
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ES6</a></h1><h2 id="1、let和const命令"><a href="#1、let和const命令" class="headerlink" title="1、let和const命令"></a>1、let和const命令</h2><p><strong> let命令 </strong></p>
+<p>let声明的变量，只在当前代码块中有效。——适合用于for循环等  </p>
+<p>没有声明提前，一定要先声明再使用。</p>
+<p><strong> const命令 </strong></p>
+<p>const声明的常量，一旦声明，不可改变。跟let一样，先声明，后使用。如果const声明了一个数组或者对象，指向该类型数据的地址，该类型数据里的属性跟值是可以改变的，但是不能将一个新的对象或数组重新赋值，因为地址要改变了。</p>
+<p><strong> 遍历数组、对象 </strong>  </p>
+<pre><code>for(let [key,value] of arr.entries() / Object.entries(obj)){}     //数组用arr.entries(),对象用Object.entries(obj);
+</code></pre><a id="more"></a>
+<h2 id="2、变量的解构赋值"><a href="#2、变量的解构赋值" class="headerlink" title="2、变量的解构赋值"></a>2、变量的解构赋值</h2><pre><code>var [a, b, c] = [1, 2, 3];
+//允许使用默认值：
+[x, y = &apos;b&apos;] = [&apos;a&apos;, undefined]; // x=&apos;a&apos;, y=‘b&apos;  只有当值全等于undefined时，默认值才生效
+
+let [foo, [[bar], baz]] = [1, [[2], 3]];
+foo // 1
+bar // 2
+baz // 3
+
+var { foo, bar } = { foo: &quot;aaa&quot;, bar: &quot;bbb&quot; };
+foo // &quot;aaa&quot;
+bar // “bbb”
+</code></pre><p><strong> 对象解构赋值 </strong>时，先从值中找见同名属性的值，赋值给当前属性。如果是下面这种情况，当前属性foo的值是变量baz，则赋值给当前变量baz，foo只是模式，不会被赋值。</p>
+<pre><code>var { foo: baz } = { foo: &quot;aaa&quot;, bar: &quot;bbb&quot; };
+baz // &quot;aaa&quot;
+foo // error: foo is not defined
+</code></pre><p>用法：</p>
+<pre><code>let { log, sin, cos } = Math;
+</code></pre><p><strong> 字符串的解构赋值 </strong></p>
+<pre><code>let {length : len} = &apos;hello&apos;;
+len // 5
+</code></pre><p>字符串被转换成了一个类似数组的对象，似数组的对象都有一个length属性。</p>
+<p>用途：</p>
+<p><strong> 1、交换变量的值 </strong></p>
+<pre><code>var x = 1;
+var y = 2;
+[x,y] = [y,x];
+//x === 2
+//y === 1
+</code></pre><p><strong> 2、函数返回多个值 </strong></p>
+<pre><code>// 返回一个数组
+
+function example() {
+      return [1, 2, 3];
+}
+
+var [a, b, c] = example();
+
+// 返回一个对象
+
+function example() {
+      return {
+        foo: 1,
+            bar: 2
+      };
+}
+
+var { foo, bar } = example();
+</code></pre><p><strong> 3、提取json数据 </strong></p>
+<pre><code>var jsonData = {
+      id: 42,
+      status: &quot;OK&quot;,
+      data: [867, 5309]
+};
+
+let { id, status, data: number } = jsonData;
+
+console.log(id, status, number);
+// 42, &quot;OK&quot;, [867, 5309]
+</code></pre><p><strong> 4、遍历Map结构 </strong></p>
+<pre><code>var map = new Map();
+map.set(&apos;first&apos;, &apos;hello&apos;);
+map.set(&apos;second&apos;, &apos;world&apos;);
+
+for (let [key, value] of map) {
+      console.log(key + &quot; is &quot; + value);
+}
+
+// first is hello
+// second is world
+
+
+
+// 获取键名
+for (let [key] of map) {
+      // ...
+}
+
+// 获取键值
+for (let [,value] of map) {
+      // ...
+}
+</code></pre><h2 id="3、字符串的扩展"><a href="#3、字符串的扩展" class="headerlink" title="3、字符串的扩展"></a>3、字符串的扩展</h2><p><strong> Unicode表示法 </strong></p>
+<p>将码点放入大括号，就能正确解读该字符。</p>
+<pre><code>&quot;\u{20BB7}&quot;
+// “𠮷”
+</code></pre><p><strong> 字符串的遍历 </strong></p>
+<pre><code>for (let codePoint of &apos;foo&apos;) {
+      console.log(codePoint)
+}
+
+// &quot;f&quot;
+// &quot;o&quot;
+// “o&quot;
+</code></pre><p><strong> at() </strong></p>
+<p>返回制定位置的字符串，可以识别Unicode编号大于0xFFFF的字符，返回正确的字符。</p>
+<pre><code>&apos;abc&apos;.at(0) // &quot;a&quot;
+&apos;𠮷&apos;.at(0) // “𠮷&quot;
+</code></pre><p><strong> includes(), startsWith(), endsWith() </strong></p>
+<pre><code>includes()       //返回布尔值，表示是否找到了参数字符串。
+startsWith()    //返回布尔值，表示参数字符串是否在源字符串的头部。
+endsWith()        //返回布尔值，表示参数字符串是否在源字符串的尾部。
+
+var s = &apos;Hello world!&apos;;
+
+s.startsWith(&apos;Hello&apos;) // true
+s.endsWith(&apos;!&apos;) // true
+s.includes(&apos;o&apos;) // true
+</code></pre><p>可携带第二个参数，从表示开始查找的位置。<br>endsWith的行为与其他两个方法有所不同。它针对前n个字符，而其他两个方法针对从第n个位置直到字符串结束。  </p>
+<p><strong> repeat() 复制该字符串n次 </strong></p>
+<pre><code>&apos;x&apos;.repeat(3) // &quot;xxx&quot;
+&apos;hello&apos;.repeat(2) // &quot;hellohello&quot;
+&apos;na&apos;.repeat(0) // “&quot;
+&apos;na&apos;.repeat(NaN) // “”
+</code></pre><p>如果repeat的参数是字符串，则会先转换成数字。</p>
+<pre><code>&apos;na&apos;.repeat(&apos;na&apos;) // &quot;&quot;
+&apos;na&apos;.repeat(&apos;3&apos;) // “nanana&quot;
+</code></pre><p>字符串补全 padStart() 头部补全，padEnd() 用于尾部补全。</p>
+<pre><code>&apos;x&apos;.padStart(5, &apos;ab&apos;) // &apos;ababx&apos;
+&apos;x&apos;.padStart(4, &apos;ab&apos;) // &apos;abax&apos;
+
+&apos;x&apos;.padEnd(5, &apos;ab&apos;) // &apos;xabab&apos;
+&apos;x&apos;.padEnd(4, &apos;ab&apos;) // &apos;xaba&apos;
+</code></pre><p><strong> 模板字符串 </strong></p>
+<p><strong> 反引号 ``中可以写多行字符串，${}中写js表达式 </strong></p>
+<h2 id="4、正则扩展"><a href="#4、正则扩展" class="headerlink" title="4、正则扩展"></a>4、正则扩展</h2><pre><code>var regex = new RegExp(&apos;xyz&apos;, &apos;i&apos;);
+// 等价于
+var regex = /xyz/i;
+</code></pre><p><strong> flags属性 </strong></p>
+<p>flags属性，会返回正则表达式的修饰符。</p>
+<pre><code>// ES5的source属性
+// 返回正则表达式的正文
+/abc/ig.source
+// &quot;abc&quot;
+
+// ES6的flags属性
+// 返回正则表达式的修饰符
+/abc/ig.flags
+// ‘gi&apos;
+</code></pre><h2 id="5、Number扩展"><a href="#5、Number扩展" class="headerlink" title="5、Number扩展"></a>5、Number扩展</h2><p><strong> Number.isFinite() </strong>用来检查一个数值是否为有限的（finite）。</p>
+<p><strong> Number.isNaN() </strong>用来检查一个值是否为NaN。</p>
+<p><strong> Number.parseInt(), Number.parseFloat() </strong></p>
+<p><strong> Number.isInteger() </strong>用来判断一个值是否为整数。</p>
+<h2 id="6、Math扩展"><a href="#6、Math扩展" class="headerlink" title="6、Math扩展"></a>6、Math扩展</h2><p><strong> Math.trunc() </strong>方法用于去除一个数的小数部分，返回整数部分。</p>
+<p><strong> Math.sign() </strong>方法用来判断一个数到底是正数、负数、还是零。<br>它会返回五种值。</p>
+<p>参数为正数，返回+1；<br>参数为负数，返回-1；<br>参数为0，返回0；<br>参数为-0，返回-0;<br>其他值，返回NaN。  </p>
+<p><strong> Math.cbrt() </strong>方法用于计算一个数的立方根。</p>
+<h2 id="7、Array扩展"><a href="#7、Array扩展" class="headerlink" title="7、Array扩展"></a>7、Array扩展</h2><p><strong> Array.from() </strong>将类数组、可遍历的对象转换成真正的数组。</p>
+<pre><code>Array.from(&apos;hello&apos;)
+// [&apos;h&apos;, &apos;e&apos;, &apos;l&apos;, &apos;l&apos;, ‘o&apos;]
+</code></pre><p>Array.from还可以接受第二个参数，作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。</p>
+<pre><code>Array.from([1, 2, 3], (x) =&gt; x * x)
+// [1, 4, 9]
+</code></pre><p><strong> Array.of() </strong>将一组值，转换为数组。</p>
+<pre><code>Array.of(3, 11, 8) // [3,11,8]
+Array.of(3) // [3]
+Array.of(3).length // 1
+
+//区分Array        
+Array() // []
+Array(3) // [, , ,]
+Array(3, 11, 8) // [3, 11, 8]
+</code></pre><p><strong> find()和findIndex() </strong></p>
+<p>数组实例的find方法，用于找出第一个符合条件的数组成员。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为true的成员，然后返回该成员。如果没有符合条件的成员，则返回undefined。</p>
+<p>[1, 5, 10, 15].find(function(value, index, arr) {<br>  return value &gt; 9;<br>}) // 10</p>
+<p>数组实例的findIndex方法的用法与find方法非常类似，返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1。</p>
+<pre><code>[1, 5, 10, 15].findIndex(function(value, index, arr) {
+      return value &gt; 9;
+})         // 2
+</code></pre><p><strong> fill()方法使用给定值，填充一个数组。 </strong></p>
+<pre><code>[&apos;a&apos;, &apos;b&apos;, ‘c&apos;].fill(7)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+// [7, 7, 7]
+</code></pre><p><strong> entries()，keys()和values() </strong></p>
+<p>keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。</p>
+<p><strong> includes() </strong></p>
+<p>返回布尔值，判断数组中是否包含制定值  </p>
+<pre><code>[1, 2, 3].includes(2);     // true
+[1, 2, 3].includes(4);     // false
+</code></pre><h2 id="8、function扩展"><a href="#8、function扩展" class="headerlink" title="8、function扩展"></a>8、function扩展</h2><p><strong> 函数的length属性，将返回没有指定默认值的参数个数。 </strong></p>
+<p><strong> 合并数组： </strong></p>
+<pre><code>var arr1 = [&apos;a&apos;, &apos;b&apos;];
+var arr2 = [&apos;c&apos;];
+var arr3 = [&apos;d&apos;, &apos;e&apos;];
+
+// ES6的合并数组
+[...arr1, ...arr2, ...arr3]
+// [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos; ]
+</code></pre><p><strong> 函数的name属性，返回该函数的函数名。 </strong></p>
+<p><strong> 箭头函数 =&gt; </strong></p>
+<h2 id="9、Object扩展"><a href="#9、Object扩展" class="headerlink" title="9、Object扩展"></a>9、Object扩展</h2><p><strong> 属性的简写 </strong></p>
+<p>ES6允许在对象之中，只写属性名，不写属性值。这时，属性值等于属性名所代表的变量。</p>
+<pre><code>var foo = &apos;bar&apos;;
+var baz = {foo};
+baz // {foo: &quot;bar&quot;}
+
+function f(x, y) {
+      return {x, y};
+}
+
+// 等同于
+
+function f(x, y) {
+      return {x: x, y: y};
+}
+
+
+var birth = &apos;2000/01/01&apos;;
+
+var Person = {
+
+      name: &apos;张三&apos;,
+
+      //等同于birth: birth
+      birth,
+
+      // 等同于hello: function ()...
+      hello() { console.log(&apos;我的名字是&apos;, this.name); }
+
+};
+</code></pre><p><strong> 对象的合并 </strong></p>
+<pre><code>Object.assign(target,obj1,obj2);
+// 将obj1和obj2的属性合并到target上面，如果有同名属性，后者覆盖target。
+</code></pre><p><strong> 对象的遍历 </strong></p>
+<p><strong> for…in </strong><br>    Object.keys(obj)               返回对象自身所有键的数组<br>    Object.values(obj)            返回对象自身所有值的数组<br>    Object.entries(obj)          返回对象自身所有键、值的数组</p>
+<h2 id="10、Symbol-生成独一无二的字符串"><a href="#10、Symbol-生成独一无二的字符串" class="headerlink" title="10、Symbol  生成独一无二的字符串"></a>10、Symbol  生成独一无二的字符串</h2><pre><code>var s1 = Symbol(‘foo’);
+var s3 = Symbol(‘foo’);
+var s2 = Symbol.for(“foo”);
+
+s1 === s2   true
+s1 === s3   false
+</code></pre><p>原始类型，不能new，<strong> Symbol() </strong>写法没有登记机制，所以每次调用都会返回一个不同的值。<br><strong> Symbol.for() </strong>，它接受一个字符串作为参数，然后搜索有没有以该参数作为名称的Symbol值。如果有，就返回这个Symbol值，否则就新建并返回一个以该字符串为名称的Symbol值。</p>
+<h2 id="11、proxy"><a href="#11、proxy" class="headerlink" title="11、proxy"></a>11、proxy</h2><p><strong> get()  get方法的两个参数分别是目标对象和所要访问的属性 </strong></p>
+<pre><code>var person = {
+      name: &quot;张三&quot;
+};
+
+var proxy = new Proxy(person, {
+      get: function(target, property) {
+        if (property in target) {
+              return target[property];
+        } else {
+              throw new ReferenceError(&quot;Property \&quot;&quot; + property + &quot;\&quot; does not exist.&quot;);
+            }
+      }
+});
+
+proxy.name // &quot;张三&quot;
+proxy.age // 抛出一个错误
+</code></pre><p><strong> set()  set方法用来拦截某个属性的赋值操作。三个参数分别是实例对象、修改的属性名、修改的属性值。 </strong></p>
+<pre><code>let validator = {
+      set: function(obj, prop, value) {
+        if (prop === &apos;age&apos;) {
+              if (!Number.isInteger(value)) {
+                throw new TypeError(&apos;The age is not an integer&apos;);
+              }
+              if (value &gt; 200) {
+                throw new RangeError(&apos;The age seems invalid&apos;);
+              }
+        }
+
+        // 对于age以外的属性，直接保存
+        obj[prop] = value;
+      }
+};
+
+let person = new Proxy({}, validator);
+
+person.age = 100;
+
+person.age // 100
+person.age = &apos;young&apos; // 报错
+person.age = 300 // 报错
+</code></pre><h2 id="12、set和map数据结构"><a href="#12、set和map数据结构" class="headerlink" title="12、set和map数据结构"></a>12、set和map数据结构</h2><p><strong> new Set() </strong>创建的值类似于数组，但是成员的值都是唯一的，没有重复的值。因此可以结合扩展运算符去除重复元素：</p>
+<pre><code>// 去除数组的重复成员
+[...new Set(array)]
+</code></pre><p>通过new Set()创建的实例，拥有以下属性和方法：</p>
+<pre><code>size : 返回Set实例的成员总数。
+add(value) ：添加某个值，返回Set结构本身。
+delete(value) ：删除某个值，返回一个布尔值，表示删除是否成功。
+has(value) ：返回一个布尔值，表示该值是否为Set的成员。
+clear() ：清除所有成员，没有返回值。
+</code></pre><p><strong> new Map() </strong></p>
+<pre><code>var m = new Map();
+var o = {p: &apos;Hello World&apos;};
+
+m.set(o, &apos;content&apos;)
+m.get(o) // &quot;content&quot;
+
+m.has(o) // true
+m.delete(o) // true
+m.has(o) // false
+</code></pre><p>通过new Map()创建的实例，拥有以下属性和方法：</p>
+<pre><code>size : 返回Map实例的成员总数
+set(key, value) ： set方法设置key所对应的键值，然后返回整个Map结构。如果key已经有值，则键值会被更新，否则就新生成该键。
+get(key) ： get方法读取key对应的键值，如果找不到key，返回undefined。
+has(key) ： has方法返回一个布尔值，表示某个键是否在Map数据结构中。
+delete(key) ： delete方法删除某个键，返回true。如果删除失败，返回false。
+clear() ： clear方法清除所有成员，没有返回值。
+</code></pre><h2 id="13、Promise对象"><a href="#13、Promise对象" class="headerlink" title="13、Promise对象"></a>13、Promise对象</h2><p>三种状态：Pending（进行中）、Resolved（已完成，又称Fulfilled）和Rejected（已失败），promise实例立即调用，成功执行resolve(),可带参数，失败执行reject()，也可携带参数。promise实例的then()方法,两个参数都是function，第一个是捕捉成功时resolve的数据，第二个是捕捉失败时reject的数据。可接到传递的参数。</p>
+<pre><code>var promise1 = new Promise(function(resolve,reject){
+    console.log(11)
+    resolve(&apos;aa&apos;);
+    setTimeout(function(){
+      reject(new Error(&apos;error~~~~&apos;));
+    },1000);
+ });
+
+ promise1.then(function(value){
+    console.log(value);
+    return &apos;bb&apos;;
+  }).then(function(value){
+    console.log(value);
+  });
+</code></pre><h2 id="14、Generator函数，异步操作，可以理解为状态机。函数返回可遍历的状态"><a href="#14、Generator函数，异步操作，可以理解为状态机。函数返回可遍历的状态" class="headerlink" title="14、Generator函数，异步操作，可以理解为状态机。函数返回可遍历的状态"></a>14、Generator函数，异步操作，可以理解为状态机。函数返回可遍历的状态</h2><pre><code>function* helloWorldGenerator() {
+      yield &apos;hello&apos;;
+      yield &apos;world&apos;;
+      return &apos;ending&apos;;
+}
+
+var hw = helloWorldGenerator();
+
+hw.next()
+// { value: &apos;hello&apos;, done: false }
+
+hw.next()
+// { value: &apos;world&apos;, done: false }
+
+hw.next()
+// { value: &apos;ending&apos;, done: true }
+
+hw.next()
+// { value: undefined, done: true }
+</code></pre><p>调用Generator函数后，该函数并不执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象。执行next方法，开始执行Generator函数，知道碰到第一个yield，……….遇到yield语句，就暂停执行后面的操作，并将紧跟在yield后面的那个表达式的值，作为返回的对象的value属性值。</p>
+<p><strong> next()的参数： </strong>yield句本身没有返回值，或者说总是返回undefined。next方法可以带一个参数，该参数就会被当作上一个yield语句的返回值。</p>
+<h2 id="15、async函数"><a href="#15、async函数" class="headerlink" title="15、async函数"></a>15、async函数</h2><p><strong> async函数返回一个Promise对象。async函数内部return语句返回的值，会成为then方法回调函数的参数。 </strong></p>
+<pre><code>async function  fn(){
+    await f1();
+    await f2();
+    return ‘aaa’
+}
+
+fn().then(n =&gt; console.log(n));//‘aaa’
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/17/es6/" data-id="ciz9kjmhr0000jwfyg2idhdcm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/17/vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue-router/" style="font-size: 10px;">vue-router</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/17/es6/">es6</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/vue/">vue</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 苏吉星<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
