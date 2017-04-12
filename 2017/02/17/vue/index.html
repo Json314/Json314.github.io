@@ -5,17 +5,17 @@
   
   <title>vue | Welcome to 拉不拉卡&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack#1.0 my-project  //安装依赖，走你 cd my-project  //安装所需的模块 cnpm">
+  <meta name="description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack                 my-project  //安装依赖，走你 cd my-project  //安">
 <meta name="keywords" content="vue,vuex,vue-router,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue">
 <meta property="og:url" content="http://yoursite.com/2017/02/17/vue/index.html">
 <meta property="og:site_name" content="Welcome to 拉不拉卡's blog">
-<meta property="og:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack#1.0 my-project  //安装依赖，走你 cd my-project  //安装所需的模块 cnpm">
-<meta property="og:updated_time" content="2017-04-07T10:32:38.000Z">
+<meta property="og:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack                 my-project  //安装依赖，走你 cd my-project  //安">
+<meta property="og:updated_time" content="2017-04-12T10:14:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue">
-<meta name="twitter:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack#1.0 my-project  //安装依赖，走你 cd my-project  //安装所需的模块 cnpm">
+<meta name="twitter:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack                 my-project  //安装依赖，走你 cd my-project  //安">
   
     <link rel="alternate" href="/atom.xml" title="Welcome to 拉不拉卡&#39;s blog" type="application/atom+xml">
   
@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -91,7 +91,7 @@
 cnpm install -g vue-cli
 
 //创建一个基于 &quot;webpack&quot; 模板的新项目
-vue init webpack#1.0 my-project
+vue init webpack                 my-project
 
 //安装依赖，走你
 cd my-project
@@ -99,8 +99,10 @@ cd my-project
 //安装所需的模块
 cnpm install
 cnpm run dev
-</code></pre><a id="more"></a>
-<pre><code>（1）使用scss,   cnpm install node-sass sass-loader scss-loader - -save-dev(save前面两个-),&lt;style lang=“scss” scoped&gt; scoped是局部作用域
+
+&lt;!--more--&gt;
+
+（1）使用scss,   cnpm install node-sass sass-loader scss-loader - -save-dev(save前面两个-),&lt;style lang=“scss” scoped&gt; scoped是局部作用域
  (2)  安装出错 执行sudo rm -r -f ~/node_modules. ,重新install
   (3) 使用jquery 、vue-router ： cnpm install jquery —save-dev
 </code></pre><h2 id="2-创建Vue实例"><a href="#2-创建Vue实例" class="headerlink" title="2.创建Vue实例"></a>2.创建Vue实例</h2><pre><code>var  vm = new Vue({
@@ -547,11 +549,13 @@ import Page2 from &apos;./components/page2&apos;
 Vue.use(VueRouter)
 
 const routes = [
-      { path: ‘/page1’,name:’page1’, component: Page1 },
+      { path: ‘/page1’, component: Page1 },
       { path: &apos;/page2&apos;, component: Page2 }
 ]
 
 const router = new VueRouter({
+    mode: &apos;history&apos;,    //h5模式，url没有/#/,还有一种hash模式就是/#/
+    base: __dirname,    //双下划线
       routes
 })
 
@@ -560,8 +564,48 @@ new Vue({
       el: &apos;#app&apos;,
       render: h =&gt; h(App)
 }).$mount(&apos;#app&apos;)
-</code></pre><p><strong> 跳转：&lt;router-link :to=“{name:’page1’}”&gt;点击 </strong><br><strong> 获取URL路由参数，比如path:’/page:id’,可用$route.params.id获取 </strong><br><strong> 手动跳转：this.$router.push(‘/bar’) </strong></p>
-<h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p><a href="https://github.com/ruanyf/webpack-demos#demo01-entry-file-source" target="_blank" rel="external">例子</a></p>
+</code></pre><p><strong> 跳转：&lt;router-link :to=“{name:’page1’}”&gt;点击 </strong></p>
+<p><router-link>的参数：exact:严谨模式;append:在URL后继续追加</router-link></p>
+<p><strong> 传递参数：&lt;router-link :to=“{name:’page1’, params: {id : 1}}”&gt;点击,会跳转到name=”page1”的component,可以通过$route.params.id获取参数id的值 </strong></p>
+<p><strong> 上面代码等同于 this.$router.push({name: ‘page1’, params: { id : 1 }}) </strong></p>
+<p><strong> 获取URL路由参数，比如path:’/page/:id’,可用$route.params.id获取 </strong></p>
+<p><strong> 支持正则匹配：path: ‘page/:id(\d+)’ </strong></p>
+<p><strong> 手动跳转：this.$router.push(‘/bar’) </strong></p>
+<p><strong> 定义404页面 </strong></p>
+<pre><code>const Page404 = {
+    template: `
+        &lt;h1&gt;error 页面走丢了&lt;/h1&gt;
+    `
+}
+//routes 一定要放在routes的最后一个
+{
+    path: &apos;*&apos;,
+    component: Page404
+}
+</code></pre><p><strong> 路由钩子函数 </strong></p>
+<pre><code>//routes
+{
+    path: &apos;/foo&apos;,
+    component: Foo,
+    beforeEnter(to, from, next) =&gt;{
+        next();  //接着执行，打断为next(false)
+    },
+    beforeLeave(to, from, next) =&gt;{
+        next();  //接着执行，打断为next(false)
+    }
+}
+
+//组件中
+{
+    template: &apos;&apos;,
+    beforeRouteEnter(to, from, next) =&gt;{
+        next();  //接着执行，打断为next(false)
+    },
+    beforeRouteLeave(to, from, next) =&gt;{
+        next();  //接着执行，打断为next(false)
+    }
+}
+</code></pre><h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p><a href="https://github.com/ruanyf/webpack-demos#demo01-entry-file-source" target="_blank" rel="external">例子</a></p>
 <pre><code>全局安装webpack/webpack-dev-server
 cnpm i -g webpack webpack-dev-server
 cd 到根目录下
@@ -572,12 +616,12 @@ cnpm install css-loader style-loader --save-dev
 //js使用babel和es6新特性
 cnpm install babel-loader babel-core babel-preset-es2015 --save-dev
 
-entry: &apos;entry.js&apos;,    //入口文件
-output: {
-    path: __dirname,        //打包文件的存放位置
-    filename: &apos;bundle.js&apos;    //打包的的文件名为bundle.js
-},
-devtool: &apos;source-map&apos;,        //使用source-map调试工具，debugger调试
+  entry: &apos;entry.js&apos;,    //入口文件
+  output: {
+      path: __dirname,        //打包文件的存放位置
+      filename: &apos;bundle.js&apos;    //打包的的文件名为bundle.js
+  },
+  devtool: &apos;source-map&apos;,        //使用source-map调试工具，debugger调试
 module: {
     //加载器配置
     loaders: [
@@ -593,6 +637,9 @@ module: {
         //图片文件使用 url-loader 来处理，小于8kb的直接转为base64
         { test: /\.(png|jpg)$/, loader: &apos;url-loader?limit=8192&apos;}
     ]
+},
+resolve: {
+    extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.css&apos;, &apos;jsx&apos;]    //自动补全识别后缀
 }
 </code></pre><p>根据需要，安装所需要的包</p>
 <p><strong> 使用jQuery </strong></p>
@@ -603,12 +650,12 @@ module: {
           &quot;window.jQuery&quot;:&quot;jquery&quot;
     })
   ]
-</code></pre><p><strong> 运行 ： webpack-dev-server </strong></p>
+</code></pre><p><strong> 运行 ： webpack-dev-server –hot –inline </strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cizgc6ljy0003hafykbt6xzvj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cj1etmusw0000jufy864ncp3i" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
@@ -620,7 +667,7 @@ module: {
 <nav id="article-nav">
   
     <a href="/2017/02/16/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           Hello World
@@ -630,7 +677,7 @@ module: {
   
   
     <a href="/2017/02/17/es6/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">es6</div>
     </a>
   
@@ -648,7 +695,7 @@ module: {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -658,7 +705,7 @@ module: {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue-router/" style="font-size: 10px;">vue-router</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
     </div>
@@ -677,7 +724,7 @@ module: {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -706,7 +753,7 @@ module: {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 苏吉星<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
