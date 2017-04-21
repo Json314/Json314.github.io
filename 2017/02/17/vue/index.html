@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/17/vue/index.html">
 <meta property="og:site_name" content="Welcome to 拉不拉卡's blog">
 <meta property="og:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack                 my-project  //安装依赖，走你 cd my-project  //安">
-<meta property="og:updated_time" content="2017-04-13T05:34:07.000Z">
+<meta property="og:updated_time" content="2017-04-21T02:42:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue">
 <meta name="twitter:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack                 my-project  //安装依赖，走你 cd my-project  //安">
@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -161,59 +161,15 @@ right
 <h2 id="4-表单控件绑定"><a href="#4-表单控件绑定" class="headerlink" title="4.表单控件绑定"></a>4.表单控件绑定</h2><p><strong> v-model </strong></p>
 <p><strong> 特殊属性 </strong></p>
 <p>.lazy        默认v-model与input事件绑定，lazy变为与change事件绑定<br>number         将用户的输入转为 Number 类型（如果原值的转换结果为 NaN 则返回原值）</p>
-<h2 id="5-transition-动画"><a href="#5-transition-动画" class="headerlink" title="5.transition 动画"></a>5.transition 动画</h2><pre><code>&lt;div v-if=&quot;show&quot; transition=“expand&quot;&gt;hello&lt;/div&gt;
+<h2 id="5-transition-动画"><a href="#5-transition-动画" class="headerlink" title="5.transition 动画"></a>5.transition 动画</h2><pre><code>&lt;transition name=&quot;fade&quot;&gt;... &lt;/transition&gt;
 
-/* 必需 */
-.expand-transition {
-      transition: all .3s ease;
-      height: 30px;
-      padding: 10px;
-      background-color: #eee;
-      overflow: hidden;
+.fade-enter,.fade-leave-active{
+    opacity: 0;
 }
-
-/* .expand-enter 定义进入的开始状态 */
-/* .expand-leave 定义离开的结束状态 */
-.expand-enter, .expand-leave {
-      height: 0;
-      padding: 0 10px;
-       opacity: 0;
+.fade-enter-active,.fade-leave-active{
+    transition: opacity .5s;
 }
-
-
-Vue.transition(&apos;expand&apos;, {
-
-     beforeEnter: function (el) {
-        el.textContent = &apos;beforeEnter&apos;
-      },
-      enter: function (el) {
-        el.textContent = &apos;enter&apos;
-      },
-      afterEnter: function (el) {
-        el.textContent = &apos;afterEnter&apos;
-      },
-      enterCancelled: function (el) {
-        // handle cancellation
-      },
-
-      beforeLeave: function (el) {
-        el.textContent = &apos;beforeLeave&apos;
-      },
-      leave: function (el) {
-        el.textContent = &apos;leave&apos;
-      },
-      afterLeave: function (el) {
-        el.textContent = &apos;afterLeave&apos;
-      },
-      leaveCancelled: function (el) {
-        // handle cancellation
-      }
-});
-</code></pre><p>类名的添加和切换取决于 transition 特性的值。比如 transition=”fade”，会有三个 CSS 类名：</p>
-<p>.fade-transition 始终保留在元素上。</p>
-<p>.fade-enter 定义进入过渡的开始状态。只应用一帧然后立即删除。</p>
-<p>.fade-leave 定义离开过渡的结束状态。在离开过渡开始时生效，在它结束后删除</p>
-<h2 id="6-组件"><a href="#6-组件" class="headerlink" title="6.组件"></a>6.组件</h2><p><strong> 组件之间的通信：父传子：props；子传父：自定义事件；跨多层父子组件通信，使用一个空的 Vue 实例，然后$emit派发事件。 </strong></p>
+</code></pre><h2 id="6-组件"><a href="#6-组件" class="headerlink" title="6.组件"></a>6.组件</h2><p><strong> 组件之间的通信：父传子：props；子传父：自定义事件；跨多层父子组件通信，使用一个空的 Vue 实例，然后$emit派发事件。 </strong></p>
 <pre><code>Vue.component(&apos;child&apos;, {
       // 声明 props
       props:[‘msg],    //实例化模板时，传进来的参数,先显式地用 props 选项声明 “prop”
@@ -411,7 +367,9 @@ mapState({
      return ‘我叫’ +  this.$store.state.name+ ‘描述’ + this.$store.state.desc
       }
 })
-</code></pre><h2 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h2><p>store实例中可以定义getters函数，来获取或者修改state数据。接收 state 作为第一个参数</p>
+</code></pre><p><strong> 注意： </strong><br>mapState工具使用时，可以是[],也可以是{},当映射到store中的state的字段名，跟mapState中的字段名一样时，用[],mapState([‘name’]),相当于mapState({ name: ‘name’})；当不一致时，使用{},mapState({myName: ‘name’});</p>
+<p><strong> mapState,mapGetters,mapActions 使用方式一样 </strong></p>
+<h2 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h2><p>store实例中可以定义getters函数，来获取或者修改state数据。接收 state 作为第一个参数</p>
 <pre><code>getters: {
     doneTodos: state =&gt; {
           return state.todos.filter(todo =&gt; todo.done)
@@ -653,7 +611,7 @@ resolve: {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cj1r81ep2000302fy2wmrnqnh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cj1r8e5ld00020xfywwe2x54a" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
@@ -665,7 +623,7 @@ resolve: {
 <nav id="article-nav">
   
     <a href="/2017/02/16/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           Hello World
@@ -675,7 +633,7 @@ resolve: {
   
   
     <a href="/2017/02/17/es6/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">es6</div>
     </a>
   
@@ -693,7 +651,7 @@ resolve: {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -712,7 +670,7 @@ resolve: {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
     </div>
@@ -722,7 +680,7 @@ resolve: {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
