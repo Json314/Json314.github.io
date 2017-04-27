@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/17/vue/index.html">
 <meta property="og:site_name" content="Welcome to 拉不拉卡's blog">
 <meta property="og:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack                 my-project  //安装依赖，走你 cd my-project  //安">
-<meta property="og:updated_time" content="2017-04-21T02:42:37.000Z">
+<meta property="og:updated_time" content="2017-04-27T10:08:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue">
 <meta name="twitter:description" content="Vue Atom使用vue  install  langage-vue  1.使用Vue脚手架新建项目//全局安装 vue-cli cnpm install -g vue-cli  //创建一个基于 &amp;quot;webpack&amp;quot; 模板的新项目 vue init webpack                 my-project  //安装依赖，走你 cd my-project  //安">
@@ -169,18 +169,38 @@ right
 .fade-enter-active,.fade-leave-active{
     transition: opacity .5s;
 }
-</code></pre><h2 id="6-组件"><a href="#6-组件" class="headerlink" title="6.组件"></a>6.组件</h2><p><strong> 组件之间的通信：父传子：props；子传父：自定义事件；跨多层父子组件通信，使用一个空的 Vue 实例，然后$emit派发事件。 </strong></p>
-<pre><code>Vue.component(&apos;child&apos;, {
-      // 声明 props
-      props:[‘msg],    //实例化模板时，传进来的参数,先显式地用 props 选项声明 “prop”
-      data: function () {
-          return { a: 1 }                //必须return
-      },
-      // prop 可以用在模板内
-      // 可以用 `this.msg` 设置
-      template: &apos;&lt;span&gt;{{ msg }}&lt;/span&gt;&apos;
+</code></pre><h2 id="6-组件"><a href="#6-组件" class="headerlink" title="6.组件"></a>6.组件</h2><pre><code>Vue.component(&apos;child&apos;, {
+        // 声明 props
+        props:[‘msg],    //实例化模板时，传进来的参数,先显式地用 props 选项声明 “prop”
+        data: function () {
+                return { a: 1 }                //必须return
+        },
+        // prop 可以用在模板内
+        // 可以用 `this.msg` 设置
+        template: &apos;&lt;span&gt;{{ msg }}&lt;/span&gt;&apos;
 });
-</code></pre><p><strong> props验证 </strong></p>
+</code></pre><h3 id="组件之间的通信"><a href="#组件之间的通信" class="headerlink" title="组件之间的通信"></a>组件之间的通信</h3><p><strong> 父传子 : props传递 </strong></p>
+<pre><code>//父组件中,绑定value的值到子组件的value属性
+&lt;child :value=&quot;value&quot;&gt;&lt;/child&gt;
+
+//子组件中，先props声明,再加入计算属性中
+export default {
+    props: [&apos;value&apos;],
+    computed: {
+        data (){
+            return this.value;
+        }
+    }
+}
+</code></pre><p><strong> 子传父 : 子组件$emit(‘eventName’,data),父组件@eventName = “fn”接收事件,或者this.$on(‘eventName’,fn) </strong></p>
+<pre><code>//父组件中,接受
+&lt;child @eventName=&quot;fn&quot;&gt;&lt;/child&gt;
+
+//子组件中,派发事件
+this.$emit(‘eventName’,data);
+</code></pre><p><strong> 非父子组件传递 </strong></p>
+<pre><code>//创建一个空的vue实例hub，作为中转站,必须都注入到两个组件，并加入到计算属性，然后a组件用hub.$emit()派发事件，组件b用hub.$on()接收事件
+</code></pre><p><strong> props验证 ：父传子时验证 </strong></p>
 <pre><code>props: {
     // 基础类型检测 （`null` 意思是任何类型都可以）
     propA: Number,
@@ -611,7 +631,7 @@ resolve: {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cj1ypjneu0003cyfyu6pmtzj0" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cj208z3v80000usfywmk2ffoo" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
