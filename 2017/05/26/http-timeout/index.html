@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>http&amp;timeout | Welcome to 拉不拉卡&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="angular、vue的缓存和http拦截1.angular 解决缓存问题  ·模板文件加上版本参数或者时间戳参数  $routeProvider    .when(&amp;apos;/Book/:bookId/ch/&amp;apos;, {     templateUrl: &amp;apos;chapter.html&amp;apos; + &amp;apos;?datestamp=&amp;apos; + (new Date()).g">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http&timeout">
+<meta property="og:url" content="http://yoursite.com/2017/05/26/http-timeout/index.html">
+<meta property="og:site_name" content="Welcome to 拉不拉卡's blog">
+<meta property="og:description" content="angular、vue的缓存和http拦截1.angular 解决缓存问题  ·模板文件加上版本参数或者时间戳参数  $routeProvider    .when(&amp;apos;/Book/:bookId/ch/&amp;apos;, {     templateUrl: &amp;apos;chapter.html&amp;apos; + &amp;apos;?datestamp=&amp;apos; + (new Date()).g">
+<meta property="og:updated_time" content="2017-05-26T02:45:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http&timeout">
+<meta name="twitter:description" content="angular、vue的缓存和http拦截1.angular 解决缓存问题  ·模板文件加上版本参数或者时间戳参数  $routeProvider    .when(&amp;apos;/Book/:bookId/ch/&amp;apos;, {     templateUrl: &amp;apos;chapter.html&amp;apos; + &amp;apos;?datestamp=&amp;apos; + (new Date()).g">
+  
+    <link rel="alternate" href="/atom.xml" title="Welcome to 拉不拉卡&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Welcome to 拉不拉卡&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-http-timeout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/26/http-timeout/" class="article-date">
+  <time datetime="2017-05-26T02:43:28.000Z" itemprop="datePublished">2017-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      http&amp;timeout
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="angular、vue的缓存和http拦截"><a href="#angular、vue的缓存和http拦截" class="headerlink" title="angular、vue的缓存和http拦截"></a>angular、vue的缓存和http拦截</h1><h2 id="1-angular-解决缓存问题"><a href="#1-angular-解决缓存问题" class="headerlink" title="1.angular 解决缓存问题"></a>1.angular 解决缓存问题</h2><p><strong>  ·模板文件加上版本参数或者时间戳参数 </strong></p>
+<pre><code>$routeProvider
+   .when(&apos;/Book/:bookId/ch/&apos;, {
+    templateUrl: &apos;chapter.html&apos; + &apos;?datestamp=&apos; + (new Date()).getTime(),
+    controller: &apos;ChapterController&apos;
+  });
+</code></pre><p><strong> ·禁止模板缓存 </strong></p>
+<pre><code>app.run(function($rootScope, $templateCache) {
+    $rootScope.$on(&apos;$routeChangeStart&apos;, function(event, next, current) {
+        if (typeof(current) !== &apos;undefined&apos;){
+            $templateCache.remove(current.templateUrl);
+        }
+    });
+});
+</code></pre><a id="more"></a>
+<h2 id="2、http全局拦截"><a href="#2、http全局拦截" class="headerlink" title="2、http全局拦截"></a>2、http全局拦截</h2><p><strong> ·vue </strong></p>
+<pre><code>/******************拦截器设置请参考这部分(开始)******************/
+Vue.http.interceptors.push((request, next)  =&gt;{
+      //登录成功后将后台返回的TOKEN在本地存下来,每次请求从sessionStorage中拿到存储的TOKEN值
+      let TOKEN=sessionStorage.getItem(&apos;STORAGE_TOKEN&apos;);
+      if(TOKEN){
+        //如果请求时TOKEN存在,就为每次请求的headers中设置好TOKEN,后台根据headers中的TOKEN判断是否放行
+        request.headers.set(&apos;TOKEN&apos;,TOKEN);
+      }
+      next((response) =&gt; {
+        return response;
+      });
+});
+/******************拦截器设置请参考这部分(结束)******************/
+</code></pre><p><strong> ·angular </strong></p>
+<pre><code>app.factory(&apos;myInterceptor&apos;, [&apos;$log&apos;,&apos;$q&apos;, function($log, $q){
+    //$log.debug(&apos;&apos;);
+    console.log(&apos;进入拦截器&apos;);
+    var myInterceptor = {
+        request: function(config){
+            //此处可以判断token，session等，设置请求头headers
+            //config.headers[&apos;x-session-token&apos;] = SessionService.token;
+           if(false){       //假设token不存在
+                   return $q.reject(config);
+               }else{
+                return $q.resolve(config);
+            }
+                   return config;
+        },
+        response: function(response){
+            if(true){    //假设响应成功
+                console.log(&apos;response success&apos;);
+               return response;
+            }else{
+                return {}
+            }
+
+        }
+
+    };
+    return myInterceptor;
+}])
+app.config([&apos;$httpProvider&apos;, function($httpProvider){
+    $httpProvider.interceptors.push(&apos;myInterceptor&apos;);
+}])
+</code></pre><h2 id="3、超时机制"><a href="#3、超时机制" class="headerlink" title="3、超时机制"></a>3、超时机制</h2><p><strong> ·vue（vue-resource） </strong></p>
+<pre><code>Vue.http.interceptors.push((request, next) =&gt; {
+    let timeout;
+    // 如果某个请求设置了_timeout,那么超过该时间，会终端该（abort）请求,并执行请求设置的钩子函数onTimeout方法，不会执行then方法。
+    if (request._timeout) {
+        timeout = setTimeout(() =&gt; {
+            //自定义响应体 status:408,statustext:&quot;请求超时&quot;，并返回给下下边的next
+            next(request.respondWith(request.body, {
+             status: 408,
+             statusText: &apos;请求超时&apos;
+            }));
+
+        }, request._timeout);
+    }
+
+    next((response) =&gt; {
+        clearTimeout(timeout);
+
+        return response;
+
+    })
+});
+
+
+//页面请求
+this.$http.get(`/repairs`,{
+    params:{name:&apos;Bob&apos;},
+    _timeout:100,//设置超时时间
+}).then((response)=&gt;{
+},(err)=&gt;{
+    console.log(err.status);//如果超时，此处输出408
+});
+</code></pre><p><strong> ·angular </strong></p>
+<pre><code>$http(
+    {
+        method: &apos;get&apos;,
+        timeout: 5000
+    }
+).success(fn);
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/26/http-timeout/" data-id="cj358x9p70000k0fyycfcg3j1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/21/angular/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          angular
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue-router/" style="font-size: 10px;">vue-router</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/26/http-timeout/">http&amp;timeout</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/angular/">angular</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/es6/">es6</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/vue/">vue</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 苏吉星<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

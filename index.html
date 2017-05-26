@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,61 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-http-timeout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/26/http-timeout/" class="article-date">
+  <time datetime="2017-05-26T02:43:28.000Z" itemprop="datePublished">2017-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/26/http-timeout/">http&amp;timeout</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="angular、vue的缓存和http拦截"><a href="#angular、vue的缓存和http拦截" class="headerlink" title="angular、vue的缓存和http拦截"></a>angular、vue的缓存和http拦截</h1><h2 id="1-angular-解决缓存问题"><a href="#1-angular-解决缓存问题" class="headerlink" title="1.angular 解决缓存问题"></a>1.angular 解决缓存问题</h2><p><strong>  ·模板文件加上版本参数或者时间戳参数 </strong></p>
+<pre><code>$routeProvider
+   .when(&apos;/Book/:bookId/ch/&apos;, {
+    templateUrl: &apos;chapter.html&apos; + &apos;?datestamp=&apos; + (new Date()).getTime(),
+    controller: &apos;ChapterController&apos;
+  });
+</code></pre><p><strong> ·禁止模板缓存 </strong></p>
+<pre><code>app.run(function($rootScope, $templateCache) {
+    $rootScope.$on(&apos;$routeChangeStart&apos;, function(event, next, current) {
+        if (typeof(current) !== &apos;undefined&apos;){
+            $templateCache.remove(current.templateUrl);
+        }
+    });
+});
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/26/http-timeout/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/26/http-timeout/" data-id="cj358x9p70000k0fyycfcg3j1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-angular" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -114,7 +169,7 @@ app.provider = function(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/21/angular/" data-id="cj208z3vg0001usfyw46beiqb" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/04/21/angular/" data-id="cj358x9q70001k0fy4tasghog" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +217,7 @@ app.provider = function(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/17/es6/" data-id="cj208z3xx000busfy1gdij8ko" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/17/es6/" data-id="cj358x9qe0003k0fyn9nekn9s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
@@ -218,7 +273,7 @@ cnpm run dev
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cj208z3v80000usfywmk2ffoo" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/17/vue/" data-id="cj358x9qd0002k0fytvphvnwa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
@@ -267,7 +322,7 @@ cnpm run dev
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/16/hello-world/" data-id="cj208z3xu000ausfyfcfq89q9" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/16/hello-world/" data-id="cj358x9qm0005k0fy4jf799ee" class="article-share-link">Share</a>
       
       
     </footer>
@@ -287,7 +342,7 @@ cnpm run dev
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -297,7 +352,7 @@ cnpm run dev
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue-router/" style="font-size: 10px;">vue-router</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
     </div>
@@ -308,7 +363,7 @@ cnpm run dev
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
     </div>
   </div>
 
@@ -316,9 +371,13 @@ cnpm run dev
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/26/http-timeout/">http&amp;timeout</a>
+          </li>
         
           <li>
             <a href="/2017/04/21/angular/">angular</a>
@@ -349,7 +408,7 @@ cnpm run dev
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 苏吉星<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
