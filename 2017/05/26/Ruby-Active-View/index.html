@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ruby-Active-View | Welcome to 拉不拉卡&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;lt;%%&amp;gt;没有返回值，&amp;lt;%= %&amp;gt;输出结果">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ruby-Active-View">
+<meta property="og:url" content="http://yoursite.com/2017/05/26/Ruby-Active-View/index.html">
+<meta property="og:site_name" content="Welcome to 拉不拉卡's blog">
+<meta property="og:description" content="&amp;lt;%%&amp;gt;没有返回值，&amp;lt;%= %&amp;gt;输出结果">
+<meta property="og:updated_time" content="2017-05-26T03:06:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ruby-Active-View">
+<meta name="twitter:description" content="&amp;lt;%%&amp;gt;没有返回值，&amp;lt;%= %&amp;gt;输出结果">
+  
+    <link rel="alternate" href="/atom.xml" title="Welcome to 拉不拉卡&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Welcome to 拉不拉卡&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Ruby-Active-View" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/26/Ruby-Active-View/" class="article-date">
+  <time datetime="2017-05-26T02:50:10.000Z" itemprop="datePublished">2017-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ruby-Active-View
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&lt;%%&gt;没有返回值，&lt;%= %&gt;输出结果</p>
+<a id="more"></a>
+<p><strong> 局部视图 </strong></p>
+<pre><code>&lt;%= render “shared/menu” %&gt;
+//意思是会渲染app/views/shared/_menu.html.erb的文件
+
+&lt;%= render partial: “product” , locals: {product: @product} %&gt;
+//在_product.html.erb中，可以使用本地变量product表示@product
+
+//as选项可以为本地变量指定一个名字
+</code></pre><p><strong> link_to </strong></p>
+<pre><code>&lt;%= link_to ‘名字’ , welcome_hello_path ,  :class =&gt; &apos;link&apos; , :style =&gt; “font-size:30px;&quot; %&gt;
+//welcome_hello_path的意思是，路由变成welcome/hello
+</code></pre><p><strong> time    #转换时间格式 </strong></p>
+<pre><code>time.strftime(“%Y-%m-%d&quot;)
+</code></pre><p><strong> 布局 </strong></p>
+<pre><code>&lt;%= yield %&gt;   # yield会声明一个区域，渲染的视图将会插到这里。
+</code></pre><p><strong> 视图中可以表明多个区域：带参数的yield </strong></p>
+<pre><code>&lt;%= yield :widget %&gt;
+</code></pre><p><strong> 视图中用 content_for 将下面内容插到指定的yield区域中 </strong></p>
+<pre><code>&lt;% content_for :widget do %&gt;
+    &lt;%= render partial: &quot;home/widget/tags&quot;, locals: {ptags: @ptags} %&gt;
+&lt;% end %&gt;
+</code></pre><p><strong> Helper </strong></p>
+<p><strong> image_tag </strong></p>
+<pre><code>&lt;%= image_tag &quot;a1.jpg&quot; %&gt;   // app/assets/images/
+</code></pre><p><strong> javascript_include_tag </strong></p>
+<p><strong> javascript_include_tag:default </strong>     //引入app/assets/Javascripts文件夹下application.js</p>
+<p><strong> javascript_include_tag:all </strong>          //  引入app/assets/Javascripts文件夹下所有的js文件</p>
+<h1 id="创建rails应用"><a href="#创建rails应用" class="headerlink" title="创建rails应用"></a>创建rails应用</h1><pre><code>mkdir 文件夹名
+
+cd 当前文件夹下
+
+rails new demo - -skip-test-unit    //创建项目
+
+cd 当前文件夹下
+
+bundle install        //简写 bundle
+
+rails s 启动服务
+</code></pre><p><strong> 新建controller </strong></p>
+<pre><code>rails g controller controller_name
+</code></pre><p><strong> 配置路由，新建对应的views页面 </strong></p>
+<pre><code>get “welcome/hello” =&gt; “welcome#hello”    //当路由变为左侧时，渲染右侧view页面，执行右侧对象controller里的方法
+</code></pre><p><strong> 路由设置首页 </strong></p>
+<pre><code>root :to =&gt; “welcome#index”
+</code></pre><p><strong> 建立数据库 </strong></p>
+<pre><code>rake db:create
+</code></pre><p><strong> 删除数据库 </strong></p>
+<pre><code>rale db:drop
+</code></pre><p><strong> 创建表 model名单数，生成的controller是复数 </strong></p>
+<pre><code>rails g scaffold person name:string bio:text birthday:date    //scaffold创建一系列文件，model只创建modal
+</code></pre><p><strong> 删除表 </strong></p>
+<pre><code>rails d scaffold person
+</code></pre><p><strong> migrate </strong></p>
+<pre><code>rake db:migrate
+</code></pre><h1 id="rails操作数据库"><a href="#rails操作数据库" class="headerlink" title="rails操作数据库"></a>rails操作数据库</h1><pre><code>Person.where( :name =&gt; ‘苏苏’  )    //返回数组
+Person.find(2)      //查找主键是2
+.errors.full_messages       //返回验证失败的原因，成功则返回空数组
+</code></pre><p><strong> RESTful应用 </strong></p>
+<pre><code>config/routes.rb加入以下一行程式
+resources :events
+//会创建4个命名路由，对应7个Actions
+//运行 bin/rake routes会列出已经定义的路由规则
+//使用&lt;%=  link_to ‘Edit’ edit_event_path(event) %&gt;
+</code></pre><h1 id="Ruby-语法"><a href="#Ruby-语法" class="headerlink" title="Ruby 语法"></a>Ruby 语法</h1><p><strong> 打印： </strong></p>
+<pre><code>puts “#{}” 可以字符串插值，必须双引号，单引号的字符串不可以这样插值
+</code></pre><p><strong> 数据类型： </strong></p>
+<pre><code>整数：Integer
+浮点数：Float
+字符串：String
+数字和字符串不能直接相加，必须使用to_s、to_i、to_f来手动转型。
+区域变量：小写字母或者下划线开头
+常量：大写字母开头
+空值：nil，表示未定义状态、未设定值。
+nil.nil?   # true
+</code></pre><p><strong> 注释： </strong></p>
+<pre><code>单行：# 开头
+多行：=begin
+        This is a comment line
+     =end
+</code></pre><p><strong> 字符串Symbols,:开头 </strong></p>
+<pre><code>:this_is_a_symbol
+
+阵列Array
+Hash 键值对，一般用Symbol作key
+config = { :foo =&gt; 123, :bar =&gt; 456 }  等同于 { foo : 123 , bar : 456 }
+
+遍历Hash
+config.each do |key,value|
+    puts “#{key} is #{value}”
+end
+</code></pre><p><strong> 语句 </strong></p>
+<pre><code>if
+    if 条件
+        执行语句
+    elsif 条件
+        执行语句
+    else
+        执行语句
+    end
+
+三元运算同js
+
+控制结构Case
+
+    case name
+        when “John”
+            puts “hello John”
+        when “Rose”
+            puts “hello Rose”
+    else
+        puts “——”
+    end
+
+循环 while，loop，until，next and break
+结尾都加end，break跳出循环，next跳出本次循环
+真或假，只有false和nil是假，其他都为真
+正则，使用=~
+phone =~ /(\d{3})-(\d{4)-(\d{4})/
+
+方法Methods
+使用def开头，end结尾定义一个方法
+
+类 class定义，类名必须大写
+@实例变量，@@类变量，只能在类别内部使用，外部无法获取。$全局变量
+&lt; 代表继承
+
+Module
+Module可以定义一些方法，然后先require当前module，然后在class中通过include引用当前创建的module，这个动作叫做Mixin
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/26/Ruby-Active-View/" data-id="cj359p1e70000lbfyleqmtxad" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/26/http-timeout/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          http&amp;timeout
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-router/">vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue-router/" style="font-size: 10px;">vue-router</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/26/Ruby-Active-View/">Ruby-Active-View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/26/http-timeout/">http&amp;timeout</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/21/angular/">angular</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/es6/">es6</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/vue/">vue</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 苏吉星<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
