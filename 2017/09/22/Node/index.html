@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Welcome to 拉不拉卡&#39;s blog</title>
+  <title>Node | Welcome to 拉不拉卡&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="知识就是不断积累的过程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Welcome to 拉不拉卡's blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="单线程非阻塞I/O事件驱动">
+<meta name="keywords" content="node,express">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node">
+<meta property="og:url" content="http://yoursite.com/2017/09/22/Node/index.html">
 <meta property="og:site_name" content="Welcome to 拉不拉卡's blog">
-<meta property="og:description" content="知识就是不断积累的过程">
+<meta property="og:description" content="单线程非阻塞I/O事件驱动">
+<meta property="og:updated_time" content="2017-09-22T10:30:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Welcome to 拉不拉卡's blog">
-<meta name="twitter:description" content="知识就是不断积累的过程">
+<meta name="twitter:title" content="Node">
+<meta name="twitter:description" content="单线程非阻塞I/O事件驱动">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to 拉不拉卡&#39;s blog" type="application/atom+xml">
   
@@ -152,92 +154,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-mongodb" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Node" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/22/mongodb/">mongodb</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/22/mongodb/" class="archive-article-date">
-  	<time datetime="2017-09-22T10:22:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.cnblogs.com/skyHF/archive/2016/07/24/5700157.html">安装和启动</a><br><strong>可视化工具：</strong><a href="https://robomongo.org/">robomongo</a><br>
-        
-          <a class="article-more-a" href="/2017/09/22/mongodb/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/22/mongodb/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Node" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/22/Node/">Node</a>
+    <h1 class="article-title" itemprop="name">
+      Node
     </h1>
   
 
@@ -251,11 +175,202 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>单线程</strong><br><strong>非阻塞I/O</strong><br><strong>事件驱动</strong>  </p>
-        
-          <a class="article-more-a" href="/2017/09/22/Node/#more">more >></a>
-        
+<a id="more"></a>
+<p>单线程、Non-blocking I/O、Event Driven。 实际上是一个特点。  </p>
+<p><strong>知识点</strong>  </p>
+<blockquote>
+<pre><code>node没有web容器。也就是没有根目录。页面中的url，跟物理url没有关系。
+</code></pre><p>首先，Node不为每个用户开辟一个线程，所以非常极端的选择了单线程。单线程，要照顾所有的用户，那么就必须有非阻塞I/O，否则一个人的I/O就把别人、自己都阻塞了。一旦有非阻塞I/O，一个人如果I/O去了，就会放弃CPU的使用权，换成另一个人使用CPU（或者执行此人后面的语句）。所以CPU的利用率100%。第一个人I/O结束了，就要用事件来通知线程，执行回调函数。此时必须有事件环，就有一个排队调度机制。Node中有超过半数的C++代码，在搭建事件环。</p>
+</blockquote>
+<ul>
+<li>node_modules不一定在同级目录里，会逐级向上查找。require时，写./从同级目录查找，不写./从node_modules里查找。</li>
+<li><p>每一个模块文件夹中，都推荐写一个package.json文件，里面的main选项，可以指定入口文件，如package.json：  </p>
+<pre><code>{
+    main: ‘index.js’
+}
+</code></pre></li>
+</ul>
+<h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><ul>
+<li>当一个js文件暴露出一个函数或者数据，用exports.msg = msg;</li>
+<li>当一个js文件暴露出一个类，用module.exports = People;</li>
+<li>npm init 生成package.json,^版本号固定。</li>
+</ul>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><ul>
+<li>适合处理大量并发的I/O，且向客户端发出相应之前，不需要进行复杂的处理。</li>
+</ul>
+<h1 id="http"><a href="#http" class="headerlink" title="http"></a>http</h1><pre><code>let http = require(‘http’);
+http.createServer().listen(3000, ‘127.0.0.1’);    //创建http服务
+res.writeHead(200, {“ Content-Type”: ‘text/html;charset=utf-8’ });   //设置请求头
+res.setHeader(‘Content-Type’, ‘text/html’);   //同上
+res.write(‘Hello world’);            //写入
+res.end(‘success’);
+</code></pre><p><strong>post请求</strong></p>
+<pre><code>req.addListener(‘data’, function(err, chunk){
+});
+req.addListener(‘end’, function(err, chunk){
+//此回调中，所有的post请求，参数已经全部接受完毕。
+});
+</code></pre><h1 id="url模块"><a href="#url模块" class="headerlink" title="url模块"></a>url模块</h1><pre><code>let url = require(‘url’);
+url.parse(req.url, true)，true参数可以把query参数转换成键值对的形式
+</code></pre><h1 id="fs模块"><a href="#fs模块" class="headerlink" title="fs模块"></a>fs模块</h1><ul>
+<li>fs的路径是从光标盘符开始查找，所以fs的路径应该写成绝对路径，_dirname + ‘/1.txt’,但是模块之间的引用是从当前文件的相对路径开始找。</li>
+</ul>
+<p><strong>读文件</strong></p>
+<pre><code>fs.readFile(path[, options], callback);
+// option可以是&apos;utf8&apos;
+</code></pre><p><strong>写文件</strong></p>
+<pre><code>fs.writeFile(file, data[, options], callback);
+/*
+ * data可以是string/buffer
+ * [options],flag,mode(权限),encoding
+ * /
+</code></pre><p><strong>以追加方式写文件</strong></p>
+<pre><code>fs.appendFile(filename,data,[options],callback);
+</code></pre><p><strong>创建文件夹</strong></p>
+<pre><code>fs.mkdir(path, [mode], callback);
+// [mode], 目录权限，默认0777
+</code></pre><p><strong>读文件夹</strong></p>
+<pre><code>fs.readdir(path, callback);
+</code></pre><p><strong>查看文件与目录信息</strong></p>
+<pre><code>fs.stat(path, callback);
+
+fs.lstat(path, callback); //查看符号链接文件
+</code></pre><p><strong>重命名和修改路径</strong></p>
+<pre><code>fs.rename(oldPath, newPath, callback);
+
+/**
+ * oldPath, 原目录/文件的完整路径及名；
+ * newPath, 新目录/文件的完整路径及名；如果新路径与原路径相同，而只文件名不同，则是重命名
+ * [callback(err)], 操作完成回调函数；err操作失败对象
+ */
+</code></pre><p><strong>删除文件夹</strong></p>
+<pre><code>fs.rmdir(path, callback);
+</code></pre><p><strong>监听文件修改</strong></p>
+<pre><code>//对文件进行监视，并且在监视到文件被修改时执行处理
+fs.watchFile(filename, [options], listener);
+
+/**
+ * filename, 完整路径及文件名；
+ * [options], persistent true表示持续监视，不退出程序；interval 单位毫秒，表示每隔多少毫秒监视一次文件
+ * listener, 文件发生变化时回调，有两个参数：curr为一个fs.Stat对象，被修改后文件，prev,一个fs.Stat对象，表示修改前对象
+ */
+</code></pre><p><strong>取消文件监听</strong></p>
+<pre><code>fs.unwatchFile(filename, [listener]);
+</code></pre><h1 id="表单上传"><a href="#表单上传" class="headerlink" title="表单上传"></a>表单上传</h1><p><strong>formidable模块</strong></p>
+<p>npmjs.com搜索formidable</p>
+<h1 id="express框架"><a href="#express框架" class="headerlink" title="express框架"></a><a href="http://www.expressjs.com.cn/" target="_blank" rel="external">express框架</a></h1><p><strong>使用</strong></p>
+<pre><code>npm install express --save
+var express = require(‘express’);
+var app = express();
+</code></pre><p><strong>路由：</strong></p>
+<pre><code>app.get(‘/’, function(req, res){
+    res.send(‘hello world’);
+});
+
+app.get(‘/^\student\/([\d]{10})&amp;/’, function(req, res){
+    res.send(req.params[0]);        //匹配到()里面
+});
+
+app.get(‘/teacher/:id’, function(req, res){
+    res.send(req.params.id);        //:id被转换成params的参数
+});
+
+app.listen(3000);
+</code></pre><p><strong>静态文件</strong></p>
+<pre><code>app.use(express.static(‘./dist’));      //会加载dist文件夹下的静态资源
+</code></pre><p><strong>render（模板渲染）</strong></p>
+<p>app.set(‘view engine’, ‘ejs’);            //使用ejs’模板引擎</p>
+<p>res.render(‘index’, {datas: {}});            //默认会从views文件下找模板</p>
+<p>会根据views文件夹里的模板进行渲染，如果不想使用views文件夹里的模板，可以用app.set(‘views’, ‘a’)。</p>
+<p><strong>send</strong></p>
+<p>send可以帮我们自动设置200状态和Content-Type头部。和end一样，只能用一次。</p>
+<p><strong>设定状态码</strong></p>
+<p>res.status(404).send(‘Hello world’);</p>
+<p><strong>设定Content-Type</strong></p>
+<p>res.set(‘Content-Type’, ‘text/html’);</p>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>get、post这些中间件，讲究顺序，匹配到第一个之后，就不再往后匹配了。next函数可以继续往后匹配。</p>
+<p><strong>use</strong></p>
+<p>app.use也是一个中间件。它的第一个参数，网址不是精确匹配，可以往外扩展。比如：</p>
+<pre><code>app.use(&apos;/&apos;, function(){});
+app.use(&apos;/admin&apos;, function(){});
+//所有的路由都会先匹配到第一个，然后被拦截，不再往后匹配。app.get不会拦截
+</code></pre><p><strong>处理get、post参数</strong></p>
+<p>get：用req.query对象</p>
+<p>post：使用body-parse模块，然后use这个中间件，通过req.body得到参数。如果有文件上传，还需要使用<a href="https://www.npmjs.com/package/formidable" target="_blank" rel="external">formidable</a>模块。详见<a href="http://www.expressjs.com.cn/4x/api.html#req.body" target="_blank" rel="external">express</a></p>
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><p>用户第一次访问服务器是没有cookie的，服务器可以在下行响应报头中，携带cookie信息。</p>
+<p><strong>特点</strong></p>
+<ol>
+<li>cookie是不加密的，用户可以看见；</li>
+<li>用户可以删除和修改和禁用cookie；</li>
+<li>cookie可以被篡改；</li>
+<li>cookie可以用于攻击。</li>
+</ol>
+<p><strong>使用：</strong></p>
+<pre><code>//先引入cookie-parser包
+var cookieParser = require(&apos;cookie-parser&apos;);  
+app.use()
+
+req.cookies.key;                        // 读取
+
+res.cookie(key, value, options);        // 设定
+
+options参数：
+
+{
+    domain: String,     // 域名
+    maxage: 10000,        // 有效时间，毫秒数；浏览器中为秒数
+    expires: Date,        // 有效时间
+    httpOnly: Boolean,  // 只能由web服务器访问
+    secure: Boolean,        // 仅用https访问
+    path: String           // 路径，默认&apos;/&apos;
+}
+</code></pre><h1 id="async函数"><a href="#async函数" class="headerlink" title="async函数"></a>async函数</h1><p>async函数return的数据会转化成Promise对象，可以用then捕获。await后的方法返回Promise对象，必须有resolve！！等待await里的代码执行完毕，然后执行async之后的语句。  </p>
+<pre><code>function b(){
+    return new Promise(resolve =&gt; {
+        setTimeout(function(){ resolve(‘bb’) }, 2000);
+    });
+}
+
+async function test(){
+    await b();
+    console.log(aa)
+}
+var result = test();
+result.then(
+    v =&gt; {
+        console.log(v);
+    }
+);
+</code></pre><p>上述代码，await后的b函数，2000毫秒后resolve，然后再执行下面的语句，输出aa</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>您的打赏是我的动力<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -279,16 +394,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/22/Node/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/22/Node/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/05/26/Ruby-Active-View/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ruby-Active-View
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/22/mongodb/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mongodb</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -308,541 +491,12 @@
 
 
 
-
   
-    <article id="post-Ruby-Active-View" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/26/Ruby-Active-View/">Ruby-Active-View</a>
-    </h1>
   
 
-        
-        <a href="/2017/05/26/Ruby-Active-View/" class="archive-article-date">
-  	<time datetime="2017-05-26T02:50:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  &lt;% %&gt;没有返回值，&lt;%= %&gt;输出结果</p>
-        
-          <a class="article-more-a" href="/2017/05/26/Ruby-Active-View/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ruby</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ruby on rails</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/26/Ruby-Active-View/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-http-timeout" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/26/http-timeout/">http&amp;timeout</a>
-    </h1>
   
 
-        
-        <a href="/2017/05/26/http-timeout/" class="archive-article-date">
-  	<time datetime="2017-05-26T02:43:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="angular、vue的缓存和http拦截"><a href="#angular、vue的缓存和http拦截" class="headerlink" title="angular、vue的缓存和http拦截"></a>angular、vue的缓存和http拦截</h1><h2 id="1-angular-解决缓存问题"><a href="#1-angular-解决缓存问题" class="headerlink" title="1.angular 解决缓存问题"></a>1.angular 解决缓存问题</h2><p><strong>  ·模板文件加上版本参数或者时间戳参数 </strong></p>
-<pre><code>$routeProvider
-   .when(&apos;/Book/:bookId/ch/&apos;, {
-    templateUrl: &apos;chapter.html&apos; + &apos;?datestamp=&apos; + (new Date()).getTime(),
-    controller: &apos;ChapterController&apos;
-  });
-</code></pre><p><strong> ·禁止模板缓存 </strong></p>
-<pre><code>app.run(function($rootScope, $templateCache) {
-    $rootScope.$on(&apos;$routeChangeStart&apos;, function(event, next, current) {
-        if (typeof(current) !== &apos;undefined&apos;){
-            $templateCache.remove(current.templateUrl);
-        }
-    });
-});
-</code></pre>
-        
-          <a class="article-more-a" href="/2017/05/26/http-timeout/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/26/http-timeout/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-angular" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/21/angular/">angular</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/21/angular/" class="archive-article-date">
-  	<time datetime="2017-04-21T02:28:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="angular"><a href="#angular" class="headerlink" title="angular"></a>angular</h1><h2 id="脏检查"><a href="#脏检查" class="headerlink" title="脏检查"></a>脏检查</h2><p><strong> $scope.apply(function(){}) 触发脏检查，检查scope中的每个属性是否发生变化 </strong></p>
-<h2 id="定义服务-provide"><a href="#定义服务-provide" class="headerlink" title="定义服务 $provide"></a>定义服务 $provide</h2><pre><code>//module第二个参数是一来的模块，第三个参数是个方法，用来定义服务
-var app = angular.module(&apos;myApp&apos;, [], function($provide){
-    //定义服务
-    $provide.provider = function(){
-        this.$get = function(){
-            return &apos;任何数据&apos;
-        }
-    }
-});
-
-//也可以这样定义服务
-app.provider = function(){
-    this.$get = function(){
-        return &apos;任何数据&apos;
-    }
-}
-
-//使用：注入使用，和$scope一样
-</code></pre>
-        
-          <a class="article-more-a" href="/2017/04/21/angular/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">angular</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">directive</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">form</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/21/angular/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-es6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/17/es6/">es6</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/17/es6/" class="archive-article-date">
-  	<time datetime="2017-02-17T08:41:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a><a href="http://es6.ruanyifeng.com/">ES6</a></h1><h2 id="1、let和const命令"><a href="#1、let和const命令" class="headerlink" title="1、let和const命令"></a>1、let和const命令</h2><p><strong> let命令 </strong></p>
-<p>let声明的变量，只在当前代码块中有效。——适合用于for循环等  </p>
-<p>没有声明提前，一定要先声明再使用。</p>
-<p><strong> const命令 </strong></p>
-<p>const声明的常量，一旦声明，不可改变。跟let一样，先声明，后使用。如果const声明了一个数组或者对象，指向该类型数据的地址，该类型数据里的属性跟值是可以改变的，但是不能将一个新的对象或数组重新赋值，因为地址要改变了。</p>
-<p><strong> 遍历数组、对象 </strong>  </p>
-<pre><code>for(let [key,value] of arr.entries() / Object.entries(obj)){}     //数组用arr.entries(),对象用Object.entries(obj);
-</code></pre>
-        
-          <a class="article-more-a" href="/2017/02/17/es6/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">es6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/17/es6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/17/vue/">vue</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/17/vue/" class="archive-article-date">
-  	<time datetime="2017-02-17T07:05:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a><a href="https://vuefe.cn/v2/guide/">Vue</a></h1><p><strong> Atom使用vue  install  langage-vue </strong></p>
-<h2 id="1-使用Vue脚手架新建项目"><a href="#1-使用Vue脚手架新建项目" class="headerlink" title="1.使用Vue脚手架新建项目"></a>1.使用Vue脚手架新建项目</h2><pre><code>//全局安装 vue-cli
-cnpm install -g vue-cli
-
-//创建一个基于 &quot;webpack&quot; 模板的新项目
-vue init webpack                 my-project
-
-//安装依赖，走你
-cd my-project
-
-//安装所需的模块
-cnpm install
-cnpm run dev
-</code></pre>
-        
-          <a class="article-more-a" href="/2017/02/17/vue/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">vuex</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vue-router</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/17/vue/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/16/hello-world/">Hexo 创建博客</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/16/hello-world/" class="archive-article-date">
-  	<time datetime="2017-02-16T03:53:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="安装所需环境"><a href="#安装所需环境" class="headerlink" title="安装所需环境"></a>安装所需环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">安装node</div><div class="line">安装git</div><div class="line">安装hexo</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装hexo出错解决办法：sudo npm install --unsafe-perm --verbose -g hero</div></pre></td></tr></table></figure>
-<h3 id="将项目克隆到本地"><a href="#将项目克隆到本地" class="headerlink" title="将项目克隆到本地"></a>将项目克隆到本地</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/------</div><div class="line">hexo init bloggithub.github.io</div><div class="line"><span class="built_in">cd</span> bloggithub.github.io</div><div class="line">npm install</div></pre></td></tr></table></figure>
-<h3 id="新建"><a href="#新建" class="headerlink" title="新建:"></a>新建:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new “title”</div></pre></td></tr></table></figure>
-<h3 id="提交："><a href="#提交：" class="headerlink" title="提交："></a>提交：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//Deployment 站点部署到github要配置，_config.yml文件</div><div class="line">deploy:</div><div class="line"><span class="built_in">type</span>: github</div><div class="line">repo: https://github.com/bloggithub/bloggithub.github.io.git</div><div class="line">branch: master</div></pre></td></tr></table></figure>
-<h3 id="清理生成的预览文件"><a href="#清理生成的预览文件" class="headerlink" title="清理生成的预览文件"></a>清理生成的预览文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure>
-<h3 id="重新生成"><a href="#重新生成" class="headerlink" title="重新生成"></a>重新生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
-<h3 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
-<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s</div></pre></td></tr></table></figure>
-<h2 id="git提交"><a href="#git提交" class="headerlink" title="git提交"></a>git提交</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> <span class="string">''</span></div><div class="line">git add -A</div><div class="line">git commit -m <span class="string">"描述"</span></div><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/16/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -865,8 +519,8 @@ cnpm run dev
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
