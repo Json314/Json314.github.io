@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/22/Node/index.html">
 <meta property="og:site_name" content="Welcome to 拉不拉卡's blog">
 <meta property="og:description" content="单线程非阻塞I/O事件驱动">
-<meta property="og:updated_time" content="2017-09-22T10:30:40.000Z">
+<meta property="og:updated_time" content="2017-10-19T08:58:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node">
 <meta name="twitter:description" content="单线程非阻塞I/O事件驱动">
@@ -213,7 +213,7 @@ req.addListener(‘end’, function(err, chunk){
 </code></pre><h1 id="url模块"><a href="#url模块" class="headerlink" title="url模块"></a>url模块</h1><pre><code>let url = require(‘url’);
 url.parse(req.url, true)，true参数可以把query参数转换成键值对的形式
 </code></pre><h1 id="fs模块"><a href="#fs模块" class="headerlink" title="fs模块"></a>fs模块</h1><ul>
-<li>fs的路径是从光标盘符开始查找，所以fs的路径应该写成绝对路径，_dirname + ‘/1.txt’,但是模块之间的引用是从当前文件的相对路径开始找。</li>
+<li>fs的路径是从光标盘符开始查找，所以fs的路径应该写成绝对路径，__dirname + ‘/1.txt’,但是模块之间的引用是从当前文件的相对路径开始找。</li>
 </ul>
 <p><strong>读文件</strong></p>
 <pre><code>fs.readFile(path[, options], callback);
@@ -258,7 +258,33 @@ fs.watchFile(filename, [options], listener);
 <pre><code>fs.unwatchFile(filename, [listener]);
 </code></pre><h1 id="表单上传"><a href="#表单上传" class="headerlink" title="表单上传"></a>表单上传</h1><p><strong>formidable模块</strong></p>
 <p>npmjs.com搜索formidable</p>
-<h1 id="express框架"><a href="#express框架" class="headerlink" title="express框架"></a><a href="http://www.expressjs.com.cn/" target="_blank" rel="external">express框架</a></h1><p><strong>使用</strong></p>
+<h1 id="图片裁剪"><a href="#图片裁剪" class="headerlink" title="图片裁剪"></a>图片裁剪</h1><p>安装gm包</p>
+<h1 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h1><p>3个依赖，分别是 express，superagent 和 cheerio。</p>
+<p>superagent(<a href="http://visionmedia.github.io/superagent/" target="_blank" rel="external">http://visionmedia.github.io/superagent/</a> ) 是个 http 方面的库，可以发起 get 或 post 请求。</p>
+<p>cheerio(<a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="external">https://github.com/cheeriojs/cheerio</a> ) 大家可以理解成一个 Node.js 版的 jquery，用来从网页中以 css selector 取数据，使用方式跟 jquery 一样一样的。</p>
+<pre><code>app.get(&apos;/&apos;, function (req, res, next) {
+  // 用 superagent 去抓取 https://cnodejs.org/ 的内容
+  superagent.get(&apos;https://cnodejs.org/&apos;)
+    .end(function (err, sres) {
+      // 常规的错误处理
+      if (err) {
+        return next(err);
+      }
+      // sres.text 里面存储着网页的 html，将它传给 cheerio.load 之后
+      var $ = cheerio.load(sres.text);
+      var items = [];
+      $(&apos;#topic_list .topic_title&apos;).each(function (idx, element){
+        var $element = $(element);
+        items.push({
+          title: $element.attr(&apos;title&apos;),
+          href: $element.attr(&apos;href&apos;)
+        });
+      });
+
+      res.send(items);
+    });
+});
+</code></pre><h1 id="express框架"><a href="#express框架" class="headerlink" title="express框架"></a><a href="http://www.expressjs.com.cn/" target="_blank" rel="external">express框架</a></h1><p><strong>使用</strong></p>
 <pre><code>npm install express --save
 var express = require(‘express’);
 var app = express();
@@ -267,7 +293,7 @@ var app = express();
     res.send(‘hello world’);
 });
 
-app.get(‘/^\student\/([\d]{10})&amp;/’, function(req, res){
+app.get(/^\student\/([\d]{10})$/, function(req, res){
     res.send(req.params[0]);        //匹配到()里面
 });
 
@@ -284,7 +310,10 @@ app.listen(3000);
 <p>会根据views文件夹里的模板进行渲染，如果不想使用views文件夹里的模板，可以用app.set(‘views’, ‘a’)。</p>
 <p><strong>send</strong></p>
 <p>send可以帮我们自动设置200状态和Content-Type头部。和end一样，只能用一次。</p>
-<p><strong>设定状态码</strong></p>
+<p><strong>sendFile</strong></p>
+<p>sendFile可以返回一个文件</p>
+<pre><code>res.sendFile(__dirname + &apos;/public/index.html&apos;);
+</code></pre><p><strong>设定状态码</strong></p>
 <p>res.status(404).send(‘Hello world’);</p>
 <p><strong>设定Content-Type</strong></p>
 <p>res.set(‘Content-Type’, ‘text/html’);</p>
@@ -296,7 +325,7 @@ app.use(&apos;/admin&apos;, function(){});
 //所有的路由都会先匹配到第一个，然后被拦截，不再往后匹配。app.get不会拦截
 </code></pre><p><strong>处理get、post参数</strong></p>
 <p>get：用req.query对象</p>
-<p>post：使用body-parse模块，然后use这个中间件，通过req.body得到参数。如果有文件上传，还需要使用<a href="https://www.npmjs.com/package/formidable" target="_blank" rel="external">formidable</a>模块。详见<a href="http://www.expressjs.com.cn/4x/api.html#req.body" target="_blank" rel="external">express</a></p>
+<p>post：使用body-parser模块，然后use这个中间件，通过req.body得到参数。如果有文件上传，还需要使用<a href="https://www.npmjs.com/package/formidable" target="_blank" rel="external">formidable</a>模块。详见<a href="http://www.expressjs.com.cn/4x/api.html#req.body" target="_blank" rel="external">express</a></p>
 <h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><p>用户第一次访问服务器是没有cookie的，服务器可以在下行响应报头中，携带cookie信息。</p>
 <p><strong>特点</strong></p>
 <ol>
@@ -308,7 +337,7 @@ app.use(&apos;/admin&apos;, function(){});
 <p><strong>使用：</strong></p>
 <pre><code>//先引入cookie-parser包
 var cookieParser = require(&apos;cookie-parser&apos;);  
-app.use()
+app.use(cookieParser());
 
 req.cookies.key;                        // 读取
 
@@ -318,12 +347,47 @@ options参数：
 
 {
     domain: String,     // 域名
-    maxage: 10000,        // 有效时间，毫秒数；浏览器中为秒数
+    maxAge: 10000,        // 有效时间，毫秒数；浏览器中为秒数
     expires: Date,        // 有效时间
     httpOnly: Boolean,  // 只能由web服务器访问
     secure: Boolean,        // 仅用https访问
     path: String           // 路径，默认&apos;/&apos;
 }
+</code></pre><h1 id="session"><a href="#session" class="headerlink" title="session"></a><a href="https://www.npmjs.com/package/express-session" target="_blank" rel="external">session</a></h1><p>session依赖cookie，如果浏览器禁用了cookie，登陆效果消失。如果用户清除了cookie，则登陆也消失，session跟cookie不一样在哪里？session下发给浏览器的是乱码，并且在服务器内存中缓存了一些东西。下次浏览器发起请求，与缓存中的数据进行对比。</p>
+<p><strong>使用方法</strong></p>
+<pre><code>// npm install express-session
+var session = require(&apos;express-session&apos;);
+var app = express()
+app.set(&apos;trust proxy&apos;, 1) // trust first proxy
+app.use(session({
+  secret: &apos;keyboard cat&apos;,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+          secure: true,        //只允许https
+          maxAge: 3000,        //有效期(毫秒)
+          expires: new Date(),     //有效期(日期)
+          httpOnly: true
+  }
+}));
+
+// 设定req，读取也是req
+req.session.views = 1;
+</code></pre><h1 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h1><pre><code>const crypto = require(&apos;crypto&apos;);
+exports.crypto = function(data){
+  var str = crypto.createHash(&apos;sha1&apos;)
+    .update(data)
+    .digest(&apos;hex&apos;);
+  return str;
+}
+</code></pre><p>#<a href="socket.io">socket</a></p>
+<pre><code>socket.on();     // 监听消息
+
+socket.emit();    // 发消息
+
+socket.broadcast.emit();        // 广播
+
+io.emit();        // 广播
 </code></pre><h1 id="async函数"><a href="#async函数" class="headerlink" title="async函数"></a>async函数</h1><p>async函数return的数据会转化成Promise对象，可以用then捕获。await后的方法返回Promise对象，必须有resolve！！等待await里的代码执行完毕，然后执行async之后的语句。  </p>
 <pre><code>function b(){
     return new Promise(resolve =&gt; {
@@ -590,6 +654,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">angular</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">directive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">form</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -606,19 +682,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">angular</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">directive</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">form</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">es6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,10 +695,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
